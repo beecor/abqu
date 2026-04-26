@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abqu - AI API Gateway for Developers</title>
+    <!-- Google Fonts & Simple CSS Reset -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        
+        /* Header */
+        .header { padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .logo { font-size: 24px; font-weight: 700; background: linear-gradient(135deg, #fff 0%, #a855f7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        
+        /* Hero */
+        .hero { padding: 80px 0; text-align: center; }
+        .hero h1 { font-size: 48px; font-weight: 700; margin-bottom: 20px; background: linear-gradient(135deg, #ffffff 0%, #c084fc 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .hero p { font-size: 20px; color: #a1a1aa; max-width: 600px; margin: 0 auto 32px; }
+        .cta-button { display: inline-block; background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%); color: white; padding: 12px 32px; border-radius: 40px; text-decoration: none; font-weight: 600; transition: transform 0.2s; }
+        .cta-button:hover { transform: translateY(-2px); }
+        
+        /* Pricing */
+        .pricing { padding: 60px 0; background: #111111; border-radius: 24px; margin: 40px 0; }
+        .section-title { text-align: center; font-size: 32px; font-weight: 700; margin-bottom: 48px; }
+        .pricing-grid { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
+        .pricing-card { background: #1a1a1a; border-radius: 16px; padding: 32px; width: 300px; border: 1px solid rgba(255,255,255,0.1); transition: border-color 0.2s; }
+        .pricing-card:hover { border-color: #a855f7; }
+        .plan-name { font-size: 24px; font-weight: 700; margin-bottom: 16px; }
+        .price { font-size: 48px; font-weight: 700; margin-bottom: 24px; }
+        .price span { font-size: 16px; font-weight: 400; color: #a1a1aa; }
+        .features { list-style: none; margin-bottom: 32px; }
+        .features li { padding: 8px 0; color: #d4d4d8; }
+        .features li::before { content: "✓"; color: #a855f7; margin-right: 8px; }
+        
+        /* Footer Links */
+        .footer-links { text-align: center; padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 40px; }
+        .footer-links a { color: #a1a1aa; text-decoration: none; margin: 0 16px; font-size: 14px; transition: color 0.2s; }
+        .footer-links a:hover { color: #a855f7; }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 32px; }
+            .hero p { font-size: 16px; }
+            .pricing-card { width: 100%; max-width: 320px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="logo">Abqu.com</div>
+        </div>
+    </div>
+
+    <main class="container">
+        <section class="hero">
+            <h1>Abqu API, All Models</h1>
+            <p>Access leading AI models through a single, unified API. Fast, reliable, and developer-friendly.</p>
+            <a href="#" class="cta-button" id="notifyBtn">Get API Key →</a>
+        </section>
+
+        <section class="pricing">
+            <h2 class="section-title">Simple, Transparent Pricing</h2>
+            <div class="pricing-grid" id="pricingGrid">
+                <!-- Pricing cards will be dynamically inserted by script.js -->
+            </div>
+        </section>
+    </main>
+
+    <div class="footer-links">
+        <a href="./privacy.html" id="privacyLink">Privacy Policy</a>
+        <a href="./terms.html" id="termsLink">Terms of Service</a>
+        <a href="mailto:service@abqu.com">Contact</a>
+    </div>
+
+    <script>
+        // Pricing plans data - 根据你的实际定价修改这里的数组内容
+        const plans = [
+            { name: '[套餐1号, : Basic]', price: '[价格, : $9]', period: '/month', features: ['[功能1, : 100K tokens]', '[功能2, : Standard support]'] },
+            { name: '[套餐2号, : Pro]', price: '[价格, : $49]', period: '/month', features: ['[功能1, : 1M tokens]', '[功能2, : Priority support]', '[功能3]'] },
+            { name: '[套餐3号, : Enterprise]', price: '[价格, : Custom]', period: '', features: ['[功能1, : Custom tokens]', '[功能2, : 24/7 support]', '[功能3]'] }
+        ];
+
+        const pricingGrid = document.getElementById('pricingGrid');
+        if (pricingGrid) {
+            pricingGrid.innerHTML = plans.map(plan => `
+                <div class="pricing-card">
+                    <div class="plan-name">${plan.name}</div>
+                    <div class="price">${plan.price}<span>${plan.period}</span></div>
+                    <ul class="features">
+                        ${plan.features.map(f => `<li>${f}</li>`).join('')}
+                    </ul>
+                </div>
+            `).join('');
+        }
+
+        // Temporary "Notify Me" behavior
+        document.getElementById('notifyBtn')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            const email = prompt('Thanks for your interest! Please enter your email, and we\'ll notify you when we launch:');
+            if (email && email.includes('@')) {
+                alert(`Thank you! We'll notify ${email} as soon as we launch.`);
+                console.log('Lead captured:', email);
+            } else if (email) {
+                alert('Please enter a valid email address.');
+            }
+        });
+    </script>
+</body>
+</html>
