@@ -1,24 +1,268 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Privacy Policy - Abqu</title>
-    <style> /* 此处可复用主页的CSS样式以保持视觉统一 */ </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Abqu · Privacy Policy</title>
+  <meta name="description" content="Abqu privacy policy — no training on your data, simple and transparent data handling for developers.">
+  <link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='70' fill='%23000'%3EA%3C/text%3E%3C/svg%3E">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #ffffff;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: #111111;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0 1.5rem 0;
+      border-bottom: 1px solid #eaeaea;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      color: #000000;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      margin-left: 1.8rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .nav-links a:first-child {
+      margin-left: 0;
+    }
+
+    .nav-links a:hover {
+      color: #000;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.5rem;
+    }
+
+    .last-updated {
+      color: #6b6b6b;
+      font-size: 0.85rem;
+      margin-bottom: 2rem;
+      border-left: 2px solid #e0e0e0;
+      padding-left: 1rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 2rem 0 1rem 0;
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid #efefef;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 1.5rem 0 0.75rem 0;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: #2c2c2c;
+    }
+
+    .highlight-box {
+      background: #f8f8f8;
+      border-left: 4px solid #000000;
+      padding: 1.2rem 1.5rem;
+      margin: 1.8rem 0;
+      border-radius: 12px;
+    }
+
+    .highlight-box p {
+      margin-bottom: 0.5rem;
+    }
+
+    ul, ol {
+      margin: 1rem 0 1rem 1.8rem;
+    }
+
+    li {
+      margin-bottom: 0.4rem;
+      color: #2c2c2c;
+    }
+
+    a {
+      color: #000;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .btn-back {
+      display: inline-block;
+      background-color: transparent;
+      border: 1px solid #cccccc;
+      padding: 0.5rem 1.2rem;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      text-decoration: none;
+      color: #111;
+      margin-top: 1rem;
+      transition: background 0.2s;
+    }
+
+    .btn-back:hover {
+      background-color: #f5f5f5;
+      border-color: #aaa;
+    }
+
+    footer {
+      border-top: 1px solid #ececec;
+      margin-top: 3rem;
+      padding: 2rem 0 1rem 0;
+      font-size: 0.8rem;
+      color: #666;
+      text-align: center;
+    }
+
+    @media (max-width: 650px) {
+      .container {
+        padding: 1.2rem;
+      }
+      h1 {
+        font-size: 1.8rem;
+      }
+      .nav-links a {
+        margin-left: 1rem;
+        font-size: 0.8rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container" style="max-width:800px; margin:0 auto; padding:48px 24px;">
-        <h1>Privacy Policy</h1>
-        <p>Last updated: [当前日期]</p>
-        <h2>1. Information We Collect</h2>
-        <p>When you use our API services, we may collect: account information (email), usage data (API calls), and payment information (processed by our third-party payment provider, Paddle).</p>
-        <h2>2. How We Use Your Information</h2>
-        <p>We use your information to provide and improve our API services, process payments, communicate with you, and ensure compliance with our Terms of Service.</p>
-        <h2>3. Data Retention</h2>
-        <p>We retain your account information for as long as your account is active, and usage logs for up to 30 days for operational purposes.</p>
-        <h2>4. Your Rights</h2>
-        <p>You may request access, correction, or deletion of your personal data by contacting us at [service@abqu.com].</p>
-        <h2>5. Contact Us</h2>
-        <p>If you have any questions, please contact us at [service@abqu.com].</p>
+<div class="container">
+  <div class="nav">
+    <a href="/" class="logo">Abqu</a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="https://docs.abqu.com">Docs</a>
+      <a href="mailto:service@abqu.com">Support</a>
     </div>
+  </div>
+
+  <h1>Privacy Policy</h1>
+  <div class="last-updated">Effective: April 27, 2026 | Updated: April 27, 2026</div>
+
+  <p>At Abqu (“we”, “us”, or “our”), your privacy matters. This Privacy Policy explains what data we collect, why we collect it, and how we protect it when you use our API gateway, website, and related services (“Service”). We follow a “developer-first, minimal data” approach.</p>
+
+  <div class="highlight-box">
+    <p><strong>🔒 Key promise</strong> — We never train models on your prompts or responses. Your data is yours. We only log enough to operate and secure the Service.</p>
+  </div>
+
+  <h2>1. Information We Collect</h2>
+  <p>We collect only the data required to provide, maintain, and improve the Service. This falls into two categories:</p>
+
+  <h3>1.1 Account & Billing Information</h3>
+  <p>When you create an account, we ask for your email address. If you purchase credits, our payment processors (Paddle, Lemon Squeezy, or Stripe) collect billing details; we never store full credit card information. We retain transaction history for tax and accounting purposes.</p>
+
+  <h3>1.2 API Usage Data (Operational Logs)</h3>
+  <p>When you call our API, we automatically record:</p>
+  <ul>
+    <li>Timestamp of the request</li>
+    <li>API key identifier (anonymized)</li>
+    <li>Model used (e.g., deepseek-chat, qwen-turbo)</li>
+    <li>Number of input and output tokens</li>
+    <li>Response status code and latency</li>
+    <li>Approximate geographic region (inferred from IP address)</li>
+  </ul>
+  <p>We <strong>do not</strong> permanently store the actual prompt or response content unless you explicitly opt in (e.g., to help debug a problem). Any temporary debugging captures are deleted within 7 days.</p>
+
+  <h3>1.3 Website & Analytics</h3>
+  <p>Our marketing site (abqu.com) uses minimal first-party analytics to count page views and referrers. We do not use Google Analytics or external tracking scripts that share data with third‑party advertising networks.</p>
+
+  <h2>2. How We Use Your Data</h2>
+  <ul>
+    <li><strong>Operate the Service</strong> – route requests, calculate usage, enforce rate limits, and generate invoices.</li>
+    <li><strong>Improve reliability</strong> – monitor error rates, latency, and capacity planning.</li>
+    <li><strong>Security and fraud prevention</strong> – detect abnormal patterns or API key abuse.</li>
+    <li><strong>Communication</strong> – send service updates, security notices, or replies to support requests.</li>
+  </ul>
+
+  <h2>3. Data Sharing & Third Parties</h2>
+  <p>We never sell your personal data. We share data only in the following limited circumstances:</p>
+  <ul>
+    <li><strong>Model providers</strong> – To fulfill your API requests, we forward your prompt to the underlying LLM provider (e.g., DeepSeek, Alibaba Cloud). Those providers have their own privacy policies governing how they process the data you submit. We choose providers that commit not to use your data for model training unless you explicitly consent.</li>
+    <li><strong>Payment processors</strong> – Paddle, Lemon Squeezy, or Stripe handle all payment transactions.</li>
+    <li><strong>Legal compliance</strong> – If required by law, court order, or to protect our rights, we may disclose necessary information.</li>
+  </ul>
+  <p>We do not share your API usage logs with any third party for advertising or marketing purposes.</p>
+
+  <h2>4. Data Retention</h2>
+  <p>Account information is retained as long as your account is active. API usage logs are kept for <strong>30 days</strong> for operational analysis and security investigation. After that, aggregated metrics (total tokens per day, per account) may be kept indefinitely, but raw logs are deleted. You may request deletion of your account by emailing <a href="mailto:service@abqu.com">service@abqu.com</a>; we will delete your personal information within 30 days, except where we need to retain transaction records for legal/financial compliance (up to 7 years).</p>
+
+  <h2>5. Your Rights & Choices</h2>
+  <p>Depending on your jurisdiction, you may have the right to:</p>
+  <ul>
+    <li>Access the personal data we hold about you</li>
+    <li>Correct inaccurate information</li>
+    <li>Request deletion of your data (subject to legal obligations)</li>
+    <li>Opt out of non‑essential communications</li>
+  </ul>
+  <p>To exercise these rights, contact us at <strong>service@abqu.com</strong>. We will respond within 30 days.</p>
+
+  <h2>6. Cookies & Tracking Technologies</h2>
+  <p>Our website uses essential cookies only (e.g., to remember your session if you log into the developer portal). We do not use persistent cookies for tracking. You can disable cookies in your browser, but some parts of the developer portal may not function properly.</p>
+
+  <h2>7. International Data Transfers</h2>
+  <p>Abqu operates globally. Your data may be processed on servers located in the United States, Singapore, or Europe, depending on where our infrastructure providers are located. We ensure appropriate safeguards (such as Standard Contractual Clauses) are in place when transferring data from the European Economic Area.</p>
+
+  <h2>8. Children’s Privacy</h2>
+  <p>Our Service is not directed to individuals under 13 (or the applicable age of digital consent in your jurisdiction). We do not knowingly collect personal information from minors. If you believe a minor has provided us with personal data, please contact us, and we will delete it.</p>
+
+  <h2>9. Security</h2>
+  <p>We take security seriously: we encrypt data in transit (TLS 1.3), use API keys with least‑privilege access, and regularly review our infrastructure. However, no method of transmission over the internet is 100% secure, so we cannot guarantee absolute security.</p>
+
+  <h2>10. Changes to This Policy</h2>
+  <p>We may update this Privacy Policy occasionally. Material changes will be announced via email or a notice on our website. Your continued use of the Service after the effective date constitutes acceptance of the revised policy.</p>
+
+  <h2>11. Contact Us</h2>
+  <p>If you have any questions or concerns about this Privacy Policy or our data practices, please email us at <a href="mailto:service@abqu.com">service@abqu.com</a> or write to our data protection officer (as displayed on our website).</p>
+
+  <div class="highlight-box">
+    <p><strong>📬 We’re transparent and accessible.</strong> Need to delete your data? Want to know what we store? Just ask: <strong>service@abqu.com</strong> — we reply within one business day.</p>
+  </div>
+
+  <a href="/" class="btn-back">← Back to Abqu.com</a>
+
+  <footer>
+    <p>© 2026 Abqu — Privacy by design, for developers.</p>
+  </footer>
+</div>
 </body>
 </html>

@@ -1,118 +1,446 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abqu - AI API Gateway for Developers</title>
-    <!-- Google Fonts & Simple CSS Reset -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0a0a0a;
-            color: #ffffff;
-            line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
-        }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-        
-        /* Header */
-        .header { padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .logo { font-size: 24px; font-weight: 700; background: linear-gradient(135deg, #fff 0%, #a855f7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        
-        /* Hero */
-        .hero { padding: 80px 0; text-align: center; }
-        .hero h1 { font-size: 48px; font-weight: 700; margin-bottom: 20px; background: linear-gradient(135deg, #ffffff 0%, #c084fc 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .hero p { font-size: 20px; color: #a1a1aa; max-width: 600px; margin: 0 auto 32px; }
-        .cta-button { display: inline-block; background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%); color: white; padding: 12px 32px; border-radius: 40px; text-decoration: none; font-weight: 600; transition: transform 0.2s; }
-        .cta-button:hover { transform: translateY(-2px); }
-        
-        /* Pricing */
-        .pricing { padding: 60px 0; background: #111111; border-radius: 24px; margin: 40px 0; }
-        .section-title { text-align: center; font-size: 32px; font-weight: 700; margin-bottom: 48px; }
-        .pricing-grid { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
-        .pricing-card { background: #1a1a1a; border-radius: 16px; padding: 32px; width: 300px; border: 1px solid rgba(255,255,255,0.1); transition: border-color 0.2s; }
-        .pricing-card:hover { border-color: #a855f7; }
-        .plan-name { font-size: 24px; font-weight: 700; margin-bottom: 16px; }
-        .price { font-size: 48px; font-weight: 700; margin-bottom: 24px; }
-        .price span { font-size: 16px; font-weight: 400; color: #a1a1aa; }
-        .features { list-style: none; margin-bottom: 32px; }
-        .features li { padding: 8px 0; color: #d4d4d8; }
-        .features li::before { content: "✓"; color: #a855f7; margin-right: 8px; }
-        
-        /* Footer Links */
-        .footer-links { text-align: center; padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 40px; }
-        .footer-links a { color: #a1a1aa; text-decoration: none; margin: 0 16px; font-size: 14px; transition: color 0.2s; }
-        .footer-links a:hover { color: #a855f7; }
-        
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 32px; }
-            .hero p { font-size: 16px; }
-            .pricing-card { width: 100%; max-width: 320px; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Abqu · Global AI Gateway</title>
+  <meta name="description" content="Abqu provides unified, high-performance API access to advanced language models. Simple integration, transparent pricing, and global edge network.">
+  <meta name="keywords" content="API, LLM, AI gateway, unified API, cost-effective inference">
+  <meta name="author" content="Abqu">
+  <meta property="og:title" content="Abqu · Unified AI Gateway">
+  <meta property="og:description" content="Simple, reliable API access to leading language models. Pay-as-you-go, global edge network.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://abqu.com">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='70' fill='%23000'%3EA%3C/text%3E%3C/svg%3E">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #ffffff;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: #111111;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    /* navigation */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0 1.5rem 0;
+      border-bottom: 1px solid #eaeaea;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      color: #000000;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333333;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #000000;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: #000000;
+      color: #ffffff;
+      border: none;
+      padding: 0.7rem 1.6rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      border-radius: 40px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.2s, transform 0.1s;
+      text-align: center;
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: #000000;
+      border: 1px solid #cccccc;
+    }
+
+    .btn-outline:hover {
+      border-color: #000000;
+      background-color: #f5f5f5;
+    }
+
+    .btn:hover {
+      background-color: #2c2c2c;
+    }
+
+    .btn-large {
+      padding: 1rem 2.5rem;
+      font-size: 1.125rem;
+    }
+
+    .hero {
+      padding: 3rem 0 4rem 0;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #444444;
+      max-width: 700px;
+      margin: 0 auto 2rem auto;
+    }
+
+    .code-block {
+      background-color: #f6f6f6;
+      border-radius: 16px;
+      padding: 1rem 1.5rem;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.85rem;
+      text-align: left;
+      overflow-x: auto;
+      margin: 2rem auto 2rem auto;
+      max-width: 780px;
+      border: 1px solid #eaeaea;
+    }
+
+    .code-block pre {
+      background: none;
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .inline-code {
+      background: #f0f0f0;
+      padding: 0.2rem 0.4rem;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 0.85rem;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin: 4rem 0;
+    }
+
+    .feature-card {
+      background: #ffffff;
+      border: 1px solid #ececec;
+      border-radius: 24px;
+      padding: 1.8rem;
+      transition: box-shadow 0.2s;
+    }
+
+    .feature-card:hover {
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-card p {
+      color: #555;
+      font-size: 0.95rem;
+    }
+
+    .pricing {
+      margin: 5rem 0;
+      text-align: center;
+    }
+
+    .pricing h2 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .pricing-sub {
+      color: #555;
+      max-width: 600px;
+      margin: 0 auto 3rem auto;
+    }
+
+    .pricing-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .pricing-card {
+      background: #ffffff;
+      border: 1px solid #eaeaea;
+      border-radius: 32px;
+      padding: 2rem 2rem;
+      width: 280px;
+      text-align: left;
+    }
+
+    .pricing-card strong {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .pricing-card .price-desc {
+      font-size: 0.9rem;
+      color: #666;
+      margin: 0.5rem 0 1.5rem 0;
+    }
+
+    .pricing-card ul {
+      list-style: none;
+      margin: 1.5rem 0;
+    }
+
+    .pricing-card li {
+      margin-bottom: 0.6rem;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .pricing-card .btn {
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .cta-banner {
+      background-color: #fafafa;
+      border-radius: 32px;
+      padding: 3rem 2rem;
+      text-align: center;
+      margin: 4rem 0;
+    }
+
+    .cta-banner h3 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .footer {
+      border-top: 1px solid #ececec;
+      padding: 2rem 0;
+      margin-top: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.85rem;
+      color: #666;
+    }
+
+    .footer a {
+      color: #111;
+      text-decoration: none;
+      margin-right: 1.5rem;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 700px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      .nav-links {
+        gap: 1rem;
+      }
+      .container {
+        padding: 1rem 1.2rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="header">
-        <div class="container">
-            <div class="logo">Abqu.com</div>
-        </div>
+<div class="container">
+  <div class="nav">
+    <a href="/" class="logo">Abqu</a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="https://docs.abqu.com" target="_blank">Docs</a>
+      <a href="mailto:service@abqu.com">Support</a>
+      <a href="#" class="btn-outline btn" style="padding: 0.4rem 1.2rem;">Sign in</a>
     </div>
+  </div>
 
-    <main class="container">
-        <section class="hero">
-            <h1>Abqu API, All Models</h1>
-            <p>Access leading AI models through a single, unified API. Fast, reliable, and developer-friendly.</p>
-            <a href="#" class="cta-button" id="notifyBtn">Get API Key →</a>
-        </section>
-
-        <section class="pricing">
-            <h2 class="section-title">Simple, Transparent Pricing</h2>
-            <div class="pricing-grid" id="pricingGrid">
-                <!-- Pricing cards will be dynamically inserted by script.js -->
-            </div>
-        </section>
-    </main>
-
-    <div class="footer-links">
-        <a href="./privacy.html" id="privacyLink">Privacy Policy</a>
-        <a href="./terms.html" id="termsLink">Terms of Service</a>
-        <a href="mailto:service@abqu.com">Contact</a>
+  <div class="hero">
+    <h1>Unified API gateway for <br>high‑performance language models</h1>
+    <p>One interface, multiple models. Global low‑latency routing, pay‑as‑you‑go pricing, and transparent usage analytics.</p>
+    <div class="code-block">
+      <pre>curl https://api.abqu.com/v1/chat/completions \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "deepseek-chat",
+    "messages": [{"role": "user", "content": "Hello, Abqu!"}]
+  }'</pre>
     </div>
+    <a href="#" class="btn btn-large">Get API key →</a>
+    <p style="font-size: 0.85rem; margin-top: 1rem; color: #666;">Start with free trial · No credit card required</p>
+  </div>
 
-    <script>
-        // Pricing plans data - 根据你的实际定价修改这里的数组内容
-        const plans = [
-            { name: '[套餐1号, : Basic]', price: '[价格, : $9]', period: '/month', features: ['[功能1, : 100K tokens]', '[功能2, : Standard support]'] },
-            { name: '[套餐2号, : Pro]', price: '[价格, : $49]', period: '/month', features: ['[功能1, : 1M tokens]', '[功能2, : Priority support]', '[功能3]'] },
-            { name: '[套餐3号, : Enterprise]', price: '[价格, : Custom]', period: '', features: ['[功能1, : Custom tokens]', '[功能2, : 24/7 support]', '[功能3]'] }
-        ];
+  <div id="features">
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <h2 style="font-weight: 600;">Why choose Abqu</h2>
+      <p style="color: #555;">Built for developers who value simplicity, reliability, and efficiency</p>
+    </div>
+    <div class="features">
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Competitive pricing</h3>
+        <p>Leverage cost‑effective inference without compromising on quality. Transparent per‑token billing.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔌</div>
+        <h3>Unified interface</h3>
+        <p>Standard API format — just change the endpoint and key. No need to rewrite your existing code.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌍</div>
+        <h3>Global edge network</h3>
+        <p>Deployed on Cloudflare workers. Low latency from anywhere, automatic failover.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Real‑time dashboard</h3>
+        <p>Monitor usage, track costs, and manage API keys from a single control panel.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <h3>Multiple models</h3>
+        <p>Access a growing set of language models via one API. Switch models with a single parameter.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛡️</div>
+        <h3>Enterprise ready</h3>
+        <p>Rate limiting, audit logs, and dedicated support for production workloads.</p>
+      </div>
+    </div>
+  </div>
 
-        const pricingGrid = document.getElementById('pricingGrid');
-        if (pricingGrid) {
-            pricingGrid.innerHTML = plans.map(plan => `
-                <div class="pricing-card">
-                    <div class="plan-name">${plan.name}</div>
-                    <div class="price">${plan.price}<span>${plan.period}</span></div>
-                    <ul class="features">
-                        ${plan.features.map(f => `<li>${f}</li>`).join('')}
-                    </ul>
-                </div>
-            `).join('');
-        }
+  <div id="pricing" class="pricing">
+    <h2>Simple, usage‑based pricing</h2>
+    <div class="pricing-sub">No hidden fees — you only pay for what you use. Volume discounts available.</div>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <strong>$0.30</strong>
+        <div class="price-desc">per 1M input tokens</div>
+        <ul>
+          <li>✓ Standard API access</li>
+          <li>✓ Multiple model support</li>
+          <li>✓ Global edge routing</li>
+          <li>✓ Basic analytics</li>
+        </ul>
+        <a href="#" class="btn">Start free</a>
+      </div>
+      <div class="pricing-card">
+        <strong>$0.60</strong>
+        <div class="price-desc">per 1M output tokens</div>
+        <ul>
+          <li>✓ Priority support</li>
+          <li>✓ Advanced usage insights</li>
+          <li>✓ 99.9% uptime SLA</li>
+          <li>✓ Custom rate limits</li>
+        </ul>
+        <a href="#" class="btn">Contact sales</a>
+      </div>
+      <div class="pricing-card">
+        <strong>Volume</strong>
+        <div class="price-desc">custom plans</div>
+        <ul>
+          <li>✓ >10M tokens/month</li>
+          <li>✓ Dedicated channel</li>
+          <li>✓ Private deployment options</li>
+          <li>✓ Tailored support</li>
+        </ul>
+        <a href="#" class="btn">Talk to us</a>
+      </div>
+    </div>
+  </div>
 
-        // Temporary "Notify Me" behavior
-        document.getElementById('notifyBtn')?.addEventListener('click', (e) => {
-            e.preventDefault();
-            const email = prompt('Thanks for your interest! Please enter your email, and we\'ll notify you when we launch:');
-            if (email && email.includes('@')) {
-                alert(`Thank you! We'll notify ${email} as soon as we launch.`);
-                console.log('Lead captured:', email);
-            } else if (email) {
-                alert('Please enter a valid email address.');
-            }
-        });
-    </script>
+  <div class="cta-banner">
+    <h3>Start building with Abqu today</h3>
+    <p style="margin-bottom: 1rem;">Get your API key in minutes and explore our documentation.</p>
+    <a href="#" class="btn btn-large">Get started →</a>
+  </div>
+
+  <div class="footer">
+    <div>© 2026 Abqu — Unified AI Gateway</div>
+    <div>
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="mailto:service@abqu.com">service@abqu.com</a>
+      <a href="https://x.com/abqu" target="_blank">X</a>
+      <a href="https://github.com/abqu" target="_blank">GitHub</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const btns = document.querySelectorAll('.btn:not(.btn-outline)');
+  for (let btn of btns) {
+    btn.addEventListener('click', (e) => {
+      if (btn.getAttribute('href') && btn.getAttribute('href') !== '#') return;
+      e.preventDefault();
+      alert('🚀 Account portal is coming soon.\nFor early access, contact service@abqu.com');
+    });
+  }
+</script>
 </body>
 </html>

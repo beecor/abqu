@@ -1,26 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Terms of Service - Abqu</title>
-    <style> /* 此处可复用主页的CSS样式以保持视觉统一 */ </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Abqu · Terms of Service</title>
+  <meta name="description" content="Abqu API Service — Clear, fair and developer-friendly terms. 14-day refund policy, data privacy, and service commitment.">
+  <link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='70' fill='%23000'%3EA%3C/text%3E%3C/svg%3E">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #ffffff;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: #111111;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    /* navigation (minimal) */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0 1.5rem 0;
+      border-bottom: 1px solid #eaeaea;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      color: #000000;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      margin-left: 1.8rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .nav-links a:first-child {
+      margin-left: 0;
+    }
+
+    .nav-links a:hover {
+      color: #000;
+    }
+
+    /* content */
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.5rem;
+    }
+
+    .last-updated {
+      color: #6b6b6b;
+      font-size: 0.85rem;
+      margin-bottom: 2rem;
+      border-left: 2px solid #e0e0e0;
+      padding-left: 1rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 2rem 0 1rem 0;
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid #efefef;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 1.5rem 0 0.75rem 0;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: #2c2c2c;
+    }
+
+    .highlight-box {
+      background: #f8f8f8;
+      border-left: 4px solid #000000;
+      padding: 1.2rem 1.5rem;
+      margin: 1.8rem 0;
+      border-radius: 12px;
+    }
+
+    .highlight-box p {
+      margin-bottom: 0.5rem;
+    }
+
+    ul, ol {
+      margin: 1rem 0 1rem 1.8rem;
+    }
+
+    li {
+      margin-bottom: 0.4rem;
+      color: #2c2c2c;
+    }
+
+    a {
+      color: #000;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .btn-back {
+      display: inline-block;
+      background-color: transparent;
+      border: 1px solid #cccccc;
+      padding: 0.5rem 1.2rem;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      text-decoration: none;
+      color: #111;
+      margin-top: 1rem;
+      transition: background 0.2s;
+    }
+
+    .btn-back:hover {
+      background-color: #f5f5f5;
+      border-color: #aaa;
+    }
+
+    footer {
+      border-top: 1px solid #ececec;
+      margin-top: 3rem;
+      padding: 2rem 0 1rem 0;
+      font-size: 0.8rem;
+      color: #666;
+      text-align: center;
+    }
+
+    @media (max-width: 650px) {
+      .container {
+        padding: 1.2rem;
+      }
+      h1 {
+        font-size: 1.8rem;
+      }
+      .nav-links a {
+        margin-left: 1rem;
+        font-size: 0.8rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container" style="max-width:800px; margin:0 auto; padding:48px 24px;">
-        <h1>Terms of Service</h1>
-        <p>Last updated: [当前日期]</p>
-        <h2>1. Acceptance of Terms</h2>
-        <p>By using our API service ("Service"), you agree to be bound by these Terms of Service.</p>
-        <h2>2. API Usage</h2>
-        <p>You may not use the Service for any illegal or abusive purpose. Rate limits apply as specified in your pricing plan.</p>
-        <h2>3. Billing and Refunds</h2>
-        <p>Payments are processed securely via Paddle. All sales are final unless otherwise required by applicable law.</p>
-        <h2>4. Service Availability</h2>
-        <p>We strive for 99.9% uptime but do not guarantee uninterrupted service.</p>
-        <h2>5. Limitation of Liability</h2>
-        <p>To the maximum extent permitted by law, the Service is provided "as is" without warranties of any kind.</p>
-        <h2>6. Contact</h2>
-        <p>For any questions, please contact us at [service@abqu.com].</p>
+<div class="container">
+  <div class="nav">
+    <a href="/" class="logo">Abqu</a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="https://docs.abqu.com">Docs</a>
+      <a href="mailto:service@abqu.com">Support</a>
     </div>
+  </div>
+
+  <h1>Terms of Service</h1>
+  <div class="last-updated">Effective date: April 27, 2026 | Last updated: April 27, 2026</div>
+
+  <p>Welcome to Abqu ("we", "us", or "our"). By accessing or using our API gateway, developer portal, and related services (collectively, the "Service"), you agree to be bound by these Terms of Service ("Terms"). If you are using the Service on behalf of an organization, you represent that you have the authority to bind that organization to these Terms.</p>
+
+  <div class="highlight-box">
+    <p><strong>✨ 14‑day unconditional refund guarantee</strong> — If you are not satisfied with your initial credit purchase, simply email <strong>service@abqu.com</strong> within 14 days. We'll refund the unused balance, no questions asked.</p>
+  </div>
+
+  <h2>1. Our Service</h2>
+  <p>Abqu provides a unified, OpenAI-compatible API gateway that gives developers access to multiple large language models ("LLMs") hosted by third‑party providers (e.g., DeepSeek, Qwen, GLM). You may use our Service to send requests and receive responses via standard HTTP API calls. We manage routing, load balancing, and billing so you can focus on building your application.</p>
+
+  <h2>2. Account & API Keys</h2>
+  <p>To use the Service, you must create an account. You are responsible for safeguarding your API keys and for any activity that occurs under your account. Immediately notify us at <a href="mailto:service@abqu.com">service@abqu.com</a> if you suspect any unauthorized use. We reserve the right to suspend or terminate any API key that is compromised or used in violation of these Terms.</p>
+
+  <h2>3. Billing, Credits & Refunds</h2>
+  <p>Our Service is primarily usage‑based. You prepay for credits, and credits are consumed per token (input + output) based on the model you select. All prices are clearly displayed on our Pricing page. <strong>Credits are non‑transferable and expire 12 months after your last activity</strong>, but we will notify you via email before expiry. Unused credits are not redeemable for cash except as described in our 14‑day refund policy above. Refund requests after 14 days may be reviewed individually but are generally not granted unless required by law.</p>
+  <p>We use third‑party payment processors (Paddle / Lemon Squeezy). By making a purchase, you agree to their terms as well. All fees are exclusive of taxes; you are responsible for any applicable VAT, GST, or other taxes.</p>
+
+  <h2>4. Acceptable Use</h2>
+  <p>You may not use the Service to:</p>
+  <ul>
+    <li>Generate illegal, harmful, abusive, or discriminatory content;</li>
+    <li>Reverse engineer, extract, or replicate our API gateway infrastructure;</li>
+    <li>Attempt to bypass any usage limits or rate restrictions;</li>
+    <li>Use the Service in a manner that violates any applicable law or regulation;</li>
+    <li>Resell or sublicense API access without a separate written agreement with us (small‑scale internal redistribution to your own users is permitted as long as you comply with these Terms and do not directly compete with Abqu).</li>
+  </ul>
+  <p>Violation may result in immediate suspension and forfeiture of remaining credits.</p>
+
+  <h2>5. Data & Privacy</h2>
+  <p>We collect and process data as described in our <a href="/privacy">Privacy Policy</a>. We do not store your request/response payloads longer than necessary for operational monitoring (maximum 30 days). We never use your prompts or generated content to train or improve models without your explicit consent. For complete details, please review our Privacy Policy, which is incorporated into these Terms by reference.</p>
+
+  <h2>6. Service Availability & Modifications</h2>
+  <p>We strive for 99.9% uptime, but the Service may occasionally be unavailable due to maintenance, emergencies, or third‑party failures. We will provide advance notice of scheduled maintenance when possible. We reserve the right to modify, suspend, or discontinue any part of the Service at any time, but we will give at least 30 days' notice for material changes that affect paid users.</p>
+
+  <h2>7. Intellectual Property</h2>
+  <p>You retain all rights to any input content you provide and any output you generate using our Service. We claim no ownership over your content. Our Service, including the API design, documentation, and website, is our proprietary property. You may not copy, modify, or create derivative works of our API endpoints or website without permission.</p>
+
+  <h2>8. Limitation of Liability</h2>
+  <p>To the maximum extent permitted by law, Abqu and its suppliers shall not be liable for any indirect, incidental, special, consequential, or exemplary damages, including loss of profits, data, or goodwill, arising out of or in connection with the Service, even if we have been advised of the possibility of such damages. Our total liability for any claim arising from these Terms or the Service is limited to the amount you paid us in the 6 months preceding the claim.</p>
+
+  <h2>9. Indemnification</h2>
+  <p>You agree to indemnify and hold harmless Abqu, its affiliates, and its employees from any claims, losses, or expenses (including attorneys' fees) arising from your use of the Service, your violation of these Terms, or your infringement of any third-party rights.</p>
+
+  <h2>10. Termination</h2>
+  <p>Either party may terminate your account at any time for any reason by providing written notice. Upon termination, you lose access to your remaining credits, except that any unused credits purchased within the last 14 days will be refunded pro‑rata upon request. We may terminate your account immediately if you materially breach these Terms.</p>
+
+  <h2>11. Governing Law & Disputes</h2>
+  <p>These Terms shall be governed by the laws of Singapore (or a neutral jurisdiction of your choice) without regard to conflict of law principles. Any dispute shall be resolved through binding arbitration in accordance with the rules of the Singapore International Arbitration Centre (SIAC), conducted in English. You agree that small claims court may be used as an alternative if the claim qualifies.</p>
+
+  <h2>12. Changes to these Terms</h2>
+  <p>We may update these Terms from time to time. If we make material changes, we will notify you via email or a notice on our website. Your continued use of the Service after the changes become effective constitutes your acceptance of the revised Terms.</p>
+
+  <div class="highlight-box">
+    <p><strong>📬 Need help or have a special requirement?</strong> Our team replies within 24 hours.<br>
+    Contact us at <strong>service@abqu.com</strong> — we speak English, 中文, and HTTP.</p>
+  </div>
+
+  <a href="/" class="btn-back">← Back to Abqu.com</a>
+
+  <footer>
+    <p>© 2026 Abqu — Simple, transparent, developer‑first AI infrastructure.</p>
+  </footer>
+</div>
 </body>
 </html>
