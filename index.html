@@ -305,6 +305,14 @@
       }
     }
   </style>
+  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+    <script>
+        // 初始化设置 (关键)
+        Paddle.Initialize({
+            environment: 'sandbox', // 测试环境就写 sandbox，正式上线再改成 production
+            token: 'test_cf9ee2ec1733a0261cef07c9066' // 替换成你从Paddle沙箱后台获取的Client-Side Token
+        });
+    </script>
 </head>
 <body>
 <div class="container">
