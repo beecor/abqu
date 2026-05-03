@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+    <script>
+        // 等待 Paddle 加载完成
+        window.addEventListener('load', function() {
+            Paddle.Initialize({
+                environment: 'sandbox',
+                token: 'test_cf9ee2ec1733a0261cef07c9066'   // 替换成正确的
+            });
+            // 直接打开结账
+            Paddle.Checkout.open({
+                items: [{ priceId: 'pri_01kqhwnmktt5gt0q8h4j0w4cn7', quantity: 1 }]
+            });
+        });
+    </script>
+</head>
+<body>
+    <p>正在跳转支付...</p>
+</body>
+</html>
