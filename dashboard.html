@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>AI API Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 可选：微调深色背景下的图表样式 */
+        canvas { background: #1f2937; border-radius: 0.75rem; padding: 1rem; }
+    </style>
+</head>
+<body class="bg-gray-950 text-gray-200">
+
+<div class="max-w-6xl mx-auto p-6 md:p-8">
+
+    <!-- 标题 -->
+    <h1 class="text-3xl font-bold mb-8">AI API Dashboard</h1>
+
+    <!-- 登录卡片 -->
+    <div id="loginCard" class="max-w-md mx-auto bg-gray-900 p-6 rounded-xl shadow-lg">
+        <h2 class="text-xl font-semibold mb-4">登录</h2>
+        <input type="email" id="emailInput" class="w-full bg-gray-800 p-2 rounded mb-3" placeholder="你的邮箱" autocomplete="email">
+        <div class="flex gap-2 mb-4">
+            <input type="text" id="codeInput" class="flex-1 bg-gray-800 p-2 rounded" placeholder="验证码">
+            <button id="sendCodeBtn" class="bg-blue-600 px-4 rounded hover:bg-blue-700 transition">发送</button>
+        </div>
+        <button id="loginBtn" class="w-full bg-green-600 p-2 rounded hover:bg-green-700 transition">登录</button>
+        <p id="loginError" class="text-red-400 text-sm mt-3 hidden"></p>
+    </div>
+
+    <!-- Dashboard 主体（登录后显示） -->
+    <div id="dashboard" class="hidden">
+
+        <!-- 三卡片 -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <!-- API Key -->
+            <div class="bg-gray-900 p-6 rounded-xl">
+                <p class="text-gray-400 text-sm">API Key</p>
+                <div class="flex items-center justify-between mt-2">
+                    <code id="apiKey" class="text-green-400 break-all text-sm"></code>
+                    <div class="flex gap-2 ml-2">
+                        <button onclick="copyKey()" class="bg-blue-600 text-xs px-3 py-1 rounded">复制</button>
+                        <button onclick="resetKey()" class="bg-red-600 text-xs px-3 py-1 rounded">重置</button>
+                    </div>
+                </div>
+            </div>
+            <!-- 余额 -->
+            <div class="bg-gray-900 p-6 rounded-xl">
+                <p class="text-gray-400 text-sm">Token 余额</p>
+                <p id="balance" class="text-2xl mt-2 text-blue-400">--</p>
+            </div>
+            <!-- 邮箱 -->
+            <div class="bg-gray-900 p-6 rounded-xl">
+                <p class="text-gray-400 text-sm">登录邮箱</p>
+                <p id="userEmail" class="mt-2 truncate">--</p>
+            </div>
+        </div>
+
+        <!-- Token 使用趋势图 -->
+        <div class="bg-gray-900 p-6 rounded-xl mb-8">
+            <h2 class="text-xl mb-4">Token 使用趋势</h2>
+            <canvas id="usageChart" height="100"></canvas>
+            <p id="chartHint" class="text-gray-500 text-sm mt-2 text-center">暂无数据</p>
+        </div>
+
+        <!-- 订单记录 -->
+        <div class="bg-gray-900 p-6 rounded-xl">
+            <h2 class="text-xl mb-4">订单记录</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead class="text-gray-400 border-b border-gray-800">
+                        <tr><th class="py-2">日期</th><th>套餐</th><th>额度 (tokens)</th></tr>
+                    </thead>
+                    <tbody id="ordersTable"></tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // ------------- 全局变量 -------------
+    let currentEmail = "";
+    let currentApiKey = "";
+    let usageChart = null;
+
+    // ------------- 辅助函数 -------------
+    const API_BASE = "https://run.abqu.com";   // 如果你的 Worker 不在同域，填写完整 URL，例如 "https://run.abqu.com"
+    async function fetchJson(url, options = {}) {
+        const res = await fetch(API_BASE + url, options);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const text = await res.text();
+        try { return JSON.parse(text); } catch(e) { return text; }
+    }
+
+    // 显示错误信息
+    function showError(msg) {
+        const errDiv = document.getElementById("loginError");
+        errDiv.innerText = msg;
+        errDiv.classList.remove("hidden");
+        setTimeout(() => errDiv.classList.add("hidden"), 3000);
+    }
+
+    // 发送验证码
+    async function sendCode() {
+        const email = document.getElementById("emailInput").value.trim();
+        if (!email) return showError("请输入邮箱");
+        const btn = document.getElementById("sendCodeBtn");
+        btn.disabled = true;
+        btn.innerText = "发送中...";
+        try {
+            await fetchJson("/send-code", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email })
+            });
+            alert("验证码已发送，请查收邮件");
+        } catch (err) {
+            showError("发送失败，请稍后重试");
+        } finally {
+            btn.disabled = false;
+            btn.innerText = "发送";
+        }
+    }
+
+    // 登录验证
+    async function login() {
+        const email = document.getElementById("emailInput").value.trim();
+        const code = document.getElementById("codeInput").value.trim();
+        if (!email || !code) return showError("邮箱和验证码都不能为空");
+
+        try {
+            const res = await fetchJson("/verify-code", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, code })
+            });
+            if (res !== "ok") throw new Error("验证码错误");
+
+            // 验证成功，加载用户数据
+            currentEmail = email;
+            document.getElementById("loginCard").classList.add("hidden");
+            document.getElementById("dashboard").classList.remove("hidden");
+            await loadUserData();
+        } catch (err) {
+            showError("登录失败：" + (err.message || "验证码错误"));
+        }
+    }
+
+    // 加载用户核心数据（key, 余额, 订单, 图表）
+    async function loadUserData() {
+        try {
+            // 1. 获取用户信息 (包含 key 和 quota)
+            const user = await fetchJson(`/user?email=${encodeURIComponent(currentEmail)}`);
+            currentApiKey = user.key;
+            document.getElementById("apiKey").innerText = currentApiKey;
+            document.getElementById("userEmail").innerText = currentEmail;
+
+            // 2. 获取余额 (通过 NewAPI)
+            const balanceData = await fetchJson(`/balance?key=${encodeURIComponent(currentApiKey)}`);
+            const remainQuota = balanceData?.data?.remain_quota || user.quota || 0;
+            const balanceM = (remainQuota / 1000000).toFixed(2);
+            document.getElementById("balance").innerHTML = `${balanceM} M tokens`;
+
+            // 3. 加载订单列表
+            await loadOrders();
+
+            // 4. 加载 Token 使用图表
+            await loadUsageChart();
+
+        } catch (err) {
+            console.error(err);
+            showError("加载用户数据失败，请刷新重试");
+        }
+    }
+
+    // 订单记录
+    async function loadOrders() {
+        const orders = await fetchJson(`/orders?email=${encodeURIComponent(currentEmail)}`);
+        const tbody = document.getElementById("ordersTable");
+        tbody.innerHTML = "";
+        if (!orders || orders.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="3" class="py-4 text-center text-gray-500">暂无订单</td></tr>`;
+            return;
+        }
+        orders.forEach(order => {
+            const row = document.createElement("tr");
+            const date = new Date(order.created).toLocaleDateString();
+            const plan = order.plan || "standard";
+            const quotaNum = order.quota || 0;
+            row.innerHTML = `
+                <td class="py-2">${date}</td>
+                <td>${plan}</td>
+                <td>${(quotaNum / 1000000).toFixed(1)} M</td>
+            `;
+            tbody.appendChild(row);
+        });
+    }
+
+    // 使用趋势图：调用 /usage?key= 获取数据，自己聚合为每天总量
+    async function loadUsageChart() {
+        try {
+            const usageRaw = await fetchJson(`/usage?key=${encodeURIComponent(currentApiKey)}`);
+            // NewAPI 返回格式通常是 { data: [{ date, tokens }] }
+            let records = usageRaw?.data || [];
+            if (!Array.isArray(records) || records.length === 0) {
+                document.getElementById("chartHint").innerText = "暂无使用数据";
+                if (usageChart) usageChart.destroy();
+                return;
+            }
+            // 按日期聚合（有些记录可能是每分钟的，我们按 date 字段聚合）
+            const dailyMap = new Map();
+            records.forEach(rec => {
+                const date = rec.date ? rec.date.slice(0,10) : new Date(rec.timestamp).toISOString().slice(0,10);
+                const tokens = rec.tokens || rec.usage || 0;
+                dailyMap.set(date, (dailyMap.get(date) || 0) + tokens);
+            });
+            const sortedDates = Array.from(dailyMap.keys()).sort();
+            const labels = sortedDates;
+            const values = sortedDates.map(d => dailyMap.get(d));
+
+            const ctx = document.getElementById("usageChart").getContext("2d");
+            if (usageChart) usageChart.destroy();
+            usageChart = new Chart(ctx, {
+                type: "line",
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: "Token 消耗",
+                        data: values,
+                        borderColor: "#3b82f6",
+                        backgroundColor: "rgba(59,130,246,0.2)",
+                        fill: true,
+                        tension: 0.2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: {
+                            ticks: { callback: (v) => (v/1000).toFixed(0) + "k" }
+                        }
+                    }
+                }
+            });
+            document.getElementById("chartHint").innerHTML = `最近 ${labels.length} 天使用趋势`;
+        } catch (err) {
+            console.error(err);
+            document.getElementById("chartHint").innerText = "加载图表失败";
+        }
+    }
+
+    // 复制 API Key
+    function copyKey() {
+        navigator.clipboard.writeText(currentApiKey);
+        alert("API Key 已复制");
+    }
+
+    // 重置 Key
+    async function resetKey() {
+        if (!confirm("重置 API Key 后，旧 Key 将立即失效。确定吗？")) return;
+        try {
+            await fetchJson("/reset-key", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email: currentEmail })
+            });
+            alert("API Key 已重置，请刷新页面或重新登录查看新 Key");
+            // 重新加载用户数据（会自动获取新 key）
+            await loadUserData();
+        } catch (err) {
+            showError("重置失败，请稍后重试");
+        }
+    }
+
+    // 绑定按钮事件
+    document.getElementById("sendCodeBtn").onclick = sendCode;
+    document.getElementById("loginBtn").onclick = login;
+    window.copyKey = copyKey;
+    window.resetKey = resetKey;
+</script>
+</body>
+</html>

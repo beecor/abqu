@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-950 text-gray-200">
+<div class="max-w-6xl mx-auto p-8">
+    <h1 class="text-3xl font-bold mb-8">Admin Dashboard</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-6 mb-8">
+        <div class="bg-gray-900 p-6 rounded-xl"><p class="text-gray-400">总收入</p><p id="revenue" class="text-2xl text-green-400">$0</p></div>
+        <div class="bg-gray-900 p-6 rounded-xl"><p class="text-gray-400">成本</p><p id="cost" class="text-2xl text-red-400">$0</p></div>
+        <div class="bg-gray-900 p-6 rounded-xl"><p class="text-gray-400">利润</p><p id="profit" class="text-2xl text-blue-400">$0</p></div>
+        <div class="bg-gray-900 p-6 rounded-xl"><p class="text-gray-400">用户数</p><p id="users" class="text-2xl">0</p></div>
+        <div class="bg-gray-900 p-6 rounded-xl"><p class="text-gray-400">今日订单</p><p id="todayOrders" class="text-2xl">0</p></div>
+    </div>
+
+    <div class="bg-gray-900 p-6 rounded-xl mb-8">
+        <h2 class="text-xl mb-4">Token 使用趋势</h2>
+        <canvas id="trendChart" height="100"></canvas>
+    </div>
+
+    <button id="scanBtn" class="bg-red-600 px-4 py-2 rounded hover:bg-red-700">执行滥用扫描</button>
+    <p id="scanResult" class="mt-2 text-sm text-gray-400"></p>
+</div>
+
+<script>
+    async function loadStats() {
+        const res = await fetch('/admin-stats');
+        const data = await res.json();
+        document.getElementById('revenue').innerText = '$' + data.revenue.toFixed(2);
+        document.getElementById('cost').innerText = '$' + data.cost.toFixed(2);
+        document.getElementById('profit').innerText = '$' + data.profit.toFixed(2);
+        document.getElementById('users').innerText = data.users;
+        document.getElementById('todayOrders').innerText = data.todayOrders;
+    }
+
+    async function loadTrend() {
+        const res = await fetch('/usage-trend');
+        const data = await res.json();
+        const ctx = document.getElementById('trendChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: { labels: data.labels, datasets: [{ label: 'Token 消耗', data: data.values, borderColor: '#3b82f6', fill: true }] },
+            options: { responsive: true, plugins: { legend: { display: false } } }
+        });
+    }
+
+    async function scanAbuse() {
+        document.getElementById('scanResult').innerText = '扫描中...';
+        await fetch('/scan-abuse');
+        document.getElementById('scanResult').innerText = '扫描完成，异常 Key 已禁用';
+    }
+
+    loadStats();
+    loadTrend();
+    document.getElementById('scanBtn').onclick = scanAbuse;
+</script>
+</body>
+</html>
